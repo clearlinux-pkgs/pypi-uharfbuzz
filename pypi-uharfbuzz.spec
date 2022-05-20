@@ -4,12 +4,14 @@
 #
 Name     : pypi-uharfbuzz
 Version  : 0.25.0
-Release  : 1
+Release  : 2
 URL      : https://files.pythonhosted.org/packages/f9/e3/4116b4cf1ca40573aa8a4703b9cb4ab9480c2f40595099b7d1598b86db39/uharfbuzz-0.25.0.zip
 Source0  : https://files.pythonhosted.org/packages/f9/e3/4116b4cf1ca40573aa8a4703b9cb4ab9480c2f40595099b7d1598b86db39/uharfbuzz-0.25.0.zip
 Summary  : Streamlined Cython bindings for the harfbuzz shaping engine
 Group    : Development/Tools
 License  : Apache-2.0 MIT OFL-1.1
+Requires: pypi-uharfbuzz-filemap = %{version}-%{release}
+Requires: pypi-uharfbuzz-lib = %{version}-%{release}
 Requires: pypi-uharfbuzz-license = %{version}-%{release}
 Requires: pypi-uharfbuzz-python = %{version}-%{release}
 Requires: pypi-uharfbuzz-python3 = %{version}-%{release}
@@ -27,6 +29,24 @@ BuildRequires : pypi-virtualenv
 %description
 [![Githun CI Status](https://github.com/harfbuzz/uharfbuzz/workflows/Build%20+%20Deploy/badge.svg)](https://github.com/harfbuzz/uharfbuzz/actions?query=workflow%3A%22Build+%2B+Deploy%22)
 [![PyPI](https://img.shields.io/pypi/v/uharfbuzz.svg)](https://pypi.org/project/uharfbuzz)
+
+%package filemap
+Summary: filemap components for the pypi-uharfbuzz package.
+Group: Default
+
+%description filemap
+filemap components for the pypi-uharfbuzz package.
+
+
+%package lib
+Summary: lib components for the pypi-uharfbuzz package.
+Group: Libraries
+Requires: pypi-uharfbuzz-license = %{version}-%{release}
+Requires: pypi-uharfbuzz-filemap = %{version}-%{release}
+
+%description lib
+lib components for the pypi-uharfbuzz package.
+
 
 %package license
 Summary: license components for the pypi-uharfbuzz package.
@@ -48,6 +68,7 @@ python components for the pypi-uharfbuzz package.
 %package python3
 Summary: python3 components for the pypi-uharfbuzz package.
 Group: Default
+Requires: pypi-uharfbuzz-filemap = %{version}-%{release}
 Requires: python3-core
 Provides: pypi(uharfbuzz)
 
@@ -58,13 +79,16 @@ python3 components for the pypi-uharfbuzz package.
 %prep
 %setup -q -n uharfbuzz-0.25.0
 cd %{_builddir}/uharfbuzz-0.25.0
+pushd ..
+cp -a uharfbuzz-0.25.0 buildavx2
+popd
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1650995884
+export SOURCE_DATE_EPOCH=1653008156
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -fno-lto "
 export FCFLAGS="$FFLAGS -fno-lto "
@@ -72,6 +96,15 @@ export FFLAGS="$FFLAGS -fno-lto "
 export CXXFLAGS="$CXXFLAGS -fno-lto "
 export MAKEFLAGS=%{?_smp_mflags}
 python3 -m build --wheel --skip-dependency-check --no-isolation
+pushd ../buildavx2/
+export CFLAGS="$CFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3 "
+export CXXFLAGS="$CXXFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3 "
+export FFLAGS="$FFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3 "
+export FCFLAGS="$FCFLAGS -m64 -march=x86-64-v3 "
+export LDFLAGS="$LDFLAGS -m64 -march=x86-64-v3 "
+python3 -m build --wheel --skip-dependency-check --no-isolation
+
+popd
 
 %install
 export MAKEFLAGS=%{?_smp_mflags}
@@ -85,9 +118,26 @@ pip install --root=%{buildroot} --no-deps --ignore-installed dist/*.whl
 echo ----[ mark ]----
 cat %{buildroot}/usr/lib/python3*/site-packages/*/requires.txt || :
 echo ----[ mark ]----
+pushd ../buildavx2/
+export CFLAGS="$CFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3 "
+export CXXFLAGS="$CXXFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3 "
+export FFLAGS="$FFLAGS -m64 -march=x86-64-v3 -Wl,-z,x86-64-v3 "
+export FCFLAGS="$FCFLAGS -m64 -march=x86-64-v3 "
+export LDFLAGS="$LDFLAGS -m64 -march=x86-64-v3 "
+pip install --root=%{buildroot}-v3 --no-deps --ignore-installed dist/*.whl
+popd
+/usr/bin/elf-move.py avx2 %{buildroot}-v3 %{buildroot}/usr/share/clear/optimized-elf/ %{buildroot}/usr/share/clear/filemap/filemap-%{name}
 
 %files
 %defattr(-,root,root,-)
+
+%files filemap
+%defattr(-,root,root,-)
+/usr/share/clear/filemap/filemap-pypi-uharfbuzz
+
+%files lib
+%defattr(-,root,root,-)
+/usr/share/clear/optimized-elf/other*
 
 %files license
 %defattr(0644,root,root,0755)
