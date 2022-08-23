@@ -4,7 +4,7 @@
 #
 Name     : pypi-uharfbuzz
 Version  : 0.25.0
-Release  : 5
+Release  : 6
 URL      : https://files.pythonhosted.org/packages/f9/e3/4116b4cf1ca40573aa8a4703b9cb4ab9480c2f40595099b7d1598b86db39/uharfbuzz-0.25.0.zip
 Source0  : https://files.pythonhosted.org/packages/f9/e3/4116b4cf1ca40573aa8a4703b9cb4ab9480c2f40595099b7d1598b86db39/uharfbuzz-0.25.0.zip
 Summary  : Streamlined Cython bindings for the harfbuzz shaping engine
