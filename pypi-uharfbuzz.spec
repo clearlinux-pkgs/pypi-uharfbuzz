@@ -4,10 +4,10 @@
 # Using build pattern: pyproject
 #
 Name     : pypi-uharfbuzz
-Version  : 0.36.0
-Release  : 16
-URL      : https://files.pythonhosted.org/packages/56/56/17e18d2225b0083d198614c260c44de97479b571db7d78694a146864ee1f/uharfbuzz-0.36.0.zip
-Source0  : https://files.pythonhosted.org/packages/56/56/17e18d2225b0083d198614c260c44de97479b571db7d78694a146864ee1f/uharfbuzz-0.36.0.zip
+Version  : 0.37.0
+Release  : 17
+URL      : https://files.pythonhosted.org/packages/90/5e/65c68fef28137fe682092e888784c1199f96f73bd2a6da38e21cb9400b2d/uharfbuzz-0.37.0.zip
+Source0  : https://files.pythonhosted.org/packages/90/5e/65c68fef28137fe682092e888784c1199f96f73bd2a6da38e21cb9400b2d/uharfbuzz-0.37.0.zip
 Summary  : Streamlined Cython bindings for the harfbuzz shaping engine
 Group    : Development/Tools
 License  : Apache-2.0 MIT OFL-1.1
@@ -17,6 +17,9 @@ Requires: pypi-uharfbuzz-python3 = %{version}-%{release}
 BuildRequires : buildreq-distutils3
 BuildRequires : pypi(cython)
 BuildRequires : pypi(py)
+BuildRequires : pypi(setuptools)
+BuildRequires : pypi(setuptools_scm)
+BuildRequires : pypi(wheel)
 BuildRequires : pypi-pluggy
 BuildRequires : pypi-pytest
 BuildRequires : pypi-tox
@@ -57,10 +60,10 @@ python3 components for the pypi-uharfbuzz package.
 
 
 %prep
-%setup -q -n uharfbuzz-0.36.0
-cd %{_builddir}/uharfbuzz-0.36.0
+%setup -q -n uharfbuzz-0.37.0
+cd %{_builddir}/uharfbuzz-0.37.0
 pushd ..
-cp -a uharfbuzz-0.36.0 buildavx2
+cp -a uharfbuzz-0.37.0 buildavx2
 popd
 
 %build
@@ -68,7 +71,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1682975997
+export SOURCE_DATE_EPOCH=1683731187
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
 export FCFLAGS="$FFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
