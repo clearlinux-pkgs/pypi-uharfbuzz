@@ -5,7 +5,7 @@
 #
 Name     : pypi-uharfbuzz
 Version  : 0.37.0
-Release  : 17
+Release  : 18
 URL      : https://files.pythonhosted.org/packages/90/5e/65c68fef28137fe682092e888784c1199f96f73bd2a6da38e21cb9400b2d/uharfbuzz-0.37.0.zip
 Source0  : https://files.pythonhosted.org/packages/90/5e/65c68fef28137fe682092e888784c1199f96f73bd2a6da38e21cb9400b2d/uharfbuzz-0.37.0.zip
 Summary  : Streamlined Cython bindings for the harfbuzz shaping engine
@@ -71,7 +71,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1683731187
+export SOURCE_DATE_EPOCH=1685547643
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
 export FCFLAGS="$FFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
