@@ -1,5 +1,5 @@
 PKG_NAME := pypi-uharfbuzz
-URL = https://files.pythonhosted.org/packages/46/61/093ddbb48cbc737b3d2eebe4e1e28c216ca9008d2c9553684870e1ae45ef/uharfbuzz-0.39.0.zip
+URL = https://files.pythonhosted.org/packages/40/20/0d8066895bd262f8b85e4148c5ff467826d9facea36a5e4e25f883756e2f/uharfbuzz-0.39.1.zip
 ARCHIVES = 
 
 include ../common/Makefile.common
