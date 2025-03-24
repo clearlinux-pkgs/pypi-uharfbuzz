@@ -6,10 +6,10 @@
 # autospec commit: fbbd4e3
 #
 Name     : pypi-uharfbuzz
-Version  : 0.46.0
-Release  : 41
-URL      : https://files.pythonhosted.org/packages/1a/41/ac2ce0438ba0222d15334b53ad2f5271ba57da7593563c0b3d8b19382b33/uharfbuzz-0.46.0.tar.gz
-Source0  : https://files.pythonhosted.org/packages/1a/41/ac2ce0438ba0222d15334b53ad2f5271ba57da7593563c0b3d8b19382b33/uharfbuzz-0.46.0.tar.gz
+Version  : 0.47.0
+Release  : 42
+URL      : https://files.pythonhosted.org/packages/51/3d/3c6d551360ff62feabcb56171981ee9b50aa3095474bbaefd37995c519b9/uharfbuzz-0.47.0.tar.gz
+Source0  : https://files.pythonhosted.org/packages/51/3d/3c6d551360ff62feabcb56171981ee9b50aa3095474bbaefd37995c519b9/uharfbuzz-0.47.0.tar.gz
 Summary  : Streamlined Cython bindings for the harfbuzz shaping engine
 Group    : Development/Tools
 License  : Apache-2.0 MIT OFL-1.1
@@ -64,10 +64,10 @@ python3 components for the pypi-uharfbuzz package.
 
 
 %prep
-%setup -q -n uharfbuzz-0.46.0
-cd %{_builddir}/uharfbuzz-0.46.0
+%setup -q -n uharfbuzz-0.47.0
+cd %{_builddir}/uharfbuzz-0.47.0
 pushd ..
-cp -a uharfbuzz-0.46.0 buildavx2
+cp -a uharfbuzz-0.47.0 buildavx2
 popd
 
 %build
@@ -75,7 +75,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1741153994
+export SOURCE_DATE_EPOCH=1742826237
 export GCC_IGNORE_WERROR=1
 CLEAR_INTERMEDIATE_CFLAGS="$CLEAR_INTERMEDIATE_CFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
 CLEAR_INTERMEDIATE_FCFLAGS="$CLEAR_INTERMEDIATE_FFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
